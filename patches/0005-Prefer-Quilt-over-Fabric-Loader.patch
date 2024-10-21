@@ -5,7 +5,7 @@ Subject: [PATCH] Prefer Quilt over Fabric Loader
 
 
 diff --git a/src/main/java/net/fabricmc/loom/LoomGradlePlugin.java b/src/main/java/net/fabricmc/loom/LoomGradlePlugin.java
-index d19cd534d53871aa1f2618cf493b66a3676a6f4c..96aaf56ff212bb7fbe50003f2340ce9417cc4838 100644
+index d19cd534d53871aa1f2618cf493b66a3676a6f4c..3d6cb4517a825338995efe1aef5be2feb2314f01 100644
 --- a/src/main/java/net/fabricmc/loom/LoomGradlePlugin.java
 +++ b/src/main/java/net/fabricmc/loom/LoomGradlePlugin.java
 @@ -30,7 +30,11 @@ import java.util.Objects;
@@ -26,7 +26,7 @@ index d19cd534d53871aa1f2618cf493b66a3676a6f4c..96aaf56ff212bb7fbe50003f2340ce94
  
 +		// Tell Gradle that Quilt Loader/Fabric Loader are the same thing
 +		project.getDependencies().getComponents().all(FabricCapabilities.class);
-+		project.getConfigurations().all(c -> {
++		project.getConfigurations().configureEach(c -> {
 +			// this mirrors how it's done at https://docs.gradle.org/current/userguide/dependency_capability_conflict.html#sub:capabilities for gradle 8.10.2
 +			var rs = c.getResolutionStrategy().getCapabilitiesResolution();
 +			rs.withCapability("net.fabricmc:fabric-loader", a -> {
